@@ -28,12 +28,12 @@ namespace TestProductsFormsApp
             var repository = new ProductsRepository();
             repository.AddProducts(expProds);
 
-            this.productsTableAdapter.Fill(this.productsDbDataSet.Products);
+            UpdateGrid();
         }
 
         private void ProductListForm_Load(object sender, EventArgs e)
         {
-            this.productsTableAdapter.Fill(this.productsDbDataSet.Products);
+            UpdateGrid();
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
