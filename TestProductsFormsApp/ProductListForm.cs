@@ -6,7 +6,15 @@ namespace TestProductsFormsApp
 {
     public partial class ProductListForm : Form
     {
-        int selectedInd;
+        private int selRow = -1;
+
+        private int selCol = -1;
+
+        private int prevSelRow = -1;
+
+        private int prevSelCol = -1;
+
+        private ProductsRepository repository = new ProductsRepository();
 
         public ProductListForm()
         {
@@ -25,9 +33,10 @@ namespace TestProductsFormsApp
             var export = new ExcelExport(filename);
             var expProds = export.GetProducts();
 
-            var repository = new ProductsRepository();
             repository.AddProducts(expProds);
 
+            prevSelRow = selRow;
+            prevSelCol = selCol;
             UpdateGrid();
         }
 
@@ -38,12 +47,10 @@ namespace TestProductsFormsApp
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            int id = Convert.ToInt32(dataGridView1[0, selectedInd].Value);
-
-            dataGridView1.Rows.RemoveAt(selectedInd);
-
-            var repository = new ProductsRepository();
+            int id = Convert.ToInt32(dataGridView1[0, selRow].Value);
             repository.RemoveProductById(id);
+            
+            dataGridView1.Rows.RemoveAt(selRow);
         }
 
         private void btnExit_Click(object sender, EventArgs e)
@@ -53,10 +60,12 @@ namespace TestProductsFormsApp
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            int id = Convert.ToInt32(dataGridView1[0, selectedInd].Value);
+            int id = Convert.ToInt32(dataGridView1[0, selRow].Value);
 
-            var repository = new ProductsRepository();
             var edProduct = repository.GetProductById(id);
+
+            prevSelRow = selRow;
+            prevSelCol = selCol;
 
             ProductForm productForm = new ProductForm(edProduct, UpdateGrid);            
             productForm.Show();
@@ -64,19 +73,27 @@ namespace TestProductsFormsApp
 
         private void dataGridView1_SelectionChanged(object sender, EventArgs e)
         {
+            btnDelete.Enabled = btnEdit.Enabled = true;
+
             try
             {
-                selectedInd = dataGridView1.SelectedCells[0].RowIndex;
+                selRow = dataGridView1.CurrentCell.RowIndex;
+                selCol = dataGridView1.CurrentCell.ColumnIndex;
             }
             catch
             {
-                selectedInd = 0;
+                selRow = selCol = -1;
+                btnDelete.Enabled = btnEdit.Enabled = false;
             }
         }
 
         private void UpdateGrid()
         {
             this.productsTableAdapter.Fill(this.productsDbDataSet.Products);
+            if (prevSelRow > -1)
+            {
+                dataGridView1.Rows[prevSelRow].Cells[prevSelCol].Selected = true;
+            }
         }
     }
 }

@@ -36,9 +36,11 @@ namespace TestProductsFormsApp
 
         public void RemoveProductById(int id)
         {
-            var sample = new Product() { Id = id };
-            context.Products.Attach(sample);
-            context.Products.Remove(sample);
+            var product = context.Products
+                .Where(p => p.Id == id)
+                .FirstOrDefault();
+
+            context.Products.Remove(product);
             context.SaveChanges();
         }
 
