@@ -23,21 +23,23 @@ namespace TestProductsFormsApp
 
         private void btnImportExcel_Click(object sender, EventArgs e)
         {
-            var filename = Directory.GetCurrentDirectory() + @"\" + "test.xlsx";
-            if (!File.Exists(filename))
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.InitialDirectory = Directory.GetCurrentDirectory();
+            openFileDialog.Filter = "Excel files (*.xlsx)|*.xlsx";
+
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
-                MessageBox.Show(String.Format("Файл {0} не найден", filename));
-                return;
+                string filename = openFileDialog.FileName;
+
+                var export = new ExcelExport(filename);
+                var expProds = export.GetProducts();
+
+                repository.AddProducts(expProds);
+
+                prevSelRow = selRow;
+                prevSelCol = selCol;
+                UpdateGrid();
             }
-
-            var export = new ExcelExport(filename);
-            var expProds = export.GetProducts();
-
-            repository.AddProducts(expProds);
-
-            prevSelRow = selRow;
-            prevSelCol = selCol;
-            UpdateGrid();
         }
 
         private void ProductListForm_Load(object sender, EventArgs e)

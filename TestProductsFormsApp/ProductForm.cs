@@ -51,5 +51,27 @@ namespace TestProductsFormsApp
             updDataGrid();
             this.Close();
         }
+
+        private void tbPrice_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (tbPrice.Text.IndexOf(',', 0) == -1)
+            {
+                if ((char)(',') == (e.KeyChar))
+                    return;
+            }
+
+            if (!Char.IsNumber(e.KeyChar) && !Char.IsControl(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void tbQuantity_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!Char.IsNumber(e.KeyChar) && !Char.IsControl(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
     }
 }

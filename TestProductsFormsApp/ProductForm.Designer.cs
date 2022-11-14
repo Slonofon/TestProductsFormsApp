@@ -32,7 +32,6 @@
             this.label4 = new System.Windows.Forms.Label();
             this.tbQuantity = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.tbPrice = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.tbName = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -40,6 +39,7 @@
             this.pcbPicture = new System.Windows.Forms.PictureBox();
             this.btnSave = new System.Windows.Forms.Button();
             this.productsDbDataSet1 = new TestProductsFormsApp.ProductsDbDataSet();
+            this.tbPrice = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pcbPicture)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.productsDbDataSet1)).BeginInit();
@@ -53,13 +53,13 @@
             this.tableLayoutPanel1.Controls.Add(this.label4, 0, 3);
             this.tableLayoutPanel1.Controls.Add(this.tbQuantity, 1, 3);
             this.tableLayoutPanel1.Controls.Add(this.label3, 0, 2);
-            this.tableLayoutPanel1.Controls.Add(this.tbPrice, 1, 2);
             this.tableLayoutPanel1.Controls.Add(this.label2, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.tbName, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.label1, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.tbArticle, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.pcbPicture, 0, 4);
             this.tableLayoutPanel1.Controls.Add(this.btnSave, 0, 5);
+            this.tableLayoutPanel1.Controls.Add(this.tbPrice, 1, 2);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -89,6 +89,7 @@
             this.tbQuantity.Name = "tbQuantity";
             this.tbQuantity.Size = new System.Drawing.Size(271, 22);
             this.tbQuantity.TabIndex = 6;
+            this.tbQuantity.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbQuantity_KeyPress);
             // 
             // label3
             // 
@@ -98,13 +99,6 @@
             this.label3.Size = new System.Drawing.Size(43, 16);
             this.label3.TabIndex = 5;
             this.label3.Text = "Цена:";
-            // 
-            // tbPrice
-            // 
-            this.tbPrice.Location = new System.Drawing.Point(101, 85);
-            this.tbPrice.Name = "tbPrice";
-            this.tbPrice.Size = new System.Drawing.Size(271, 22);
-            this.tbPrice.TabIndex = 4;
             // 
             // label2
             // 
@@ -165,6 +159,14 @@
             this.productsDbDataSet1.DataSetName = "ProductsDbDataSet";
             this.productsDbDataSet1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
+            // tbPrice
+            // 
+            this.tbPrice.Location = new System.Drawing.Point(101, 85);
+            this.tbPrice.Name = "tbPrice";
+            this.tbPrice.Size = new System.Drawing.Size(100, 22);
+            this.tbPrice.TabIndex = 10;
+            this.tbPrice.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbPrice_KeyPress);
+            // 
             // ProductForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -189,7 +191,6 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox tbQuantity;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox tbPrice;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox tbName;
         private System.Windows.Forms.Label label1;
@@ -197,5 +198,6 @@
         private ProductsDbDataSet productsDbDataSet1;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.PictureBox pcbPicture;
+        private System.Windows.Forms.TextBox tbPrice;
     }
 }

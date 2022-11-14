@@ -20,7 +20,7 @@ namespace TestProductsFormsApp
 
         public IEnumerable<Product> GetProducts()
         {
-            HashSet<Product> result = new HashSet<Product>();
+            List<Product> result = new List<Product>();
 
             Excel.Application objExcel = null;
             Excel.Workbook objBook = null;

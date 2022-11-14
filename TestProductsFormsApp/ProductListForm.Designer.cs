@@ -155,7 +155,7 @@
             this.btnImportExcel.Name = "btnImportExcel";
             this.btnImportExcel.Size = new System.Drawing.Size(194, 84);
             this.btnImportExcel.TabIndex = 1;
-            this.btnImportExcel.Text = "Export XLS";
+            this.btnImportExcel.Text = "Import XLS";
             this.btnImportExcel.UseVisualStyleBackColor = false;
             this.btnImportExcel.Click += new System.EventHandler(this.btnImportExcel_Click);
             // 
